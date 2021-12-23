@@ -37,6 +37,18 @@ class CrimeData:
         data.drop(columns=['location'], inplace=True)
 
         return data
+
+    # cleaning bulk dataset (initial load for full dataset)
+    def get_bulk_crime_data(self, file):
+        bulk = pd.read_csv(file, dtype={'ID':'str','Arrest':'str','Domestic':'str'})
+        # Some typecasting
+        bulk['Date'] = pd.to_datetime(bulk['Date'], errors='coerce')
+        bulk['Updated On'] = pd.to_datetime(bulk['Updated On'], errors='coerce')
+        bulk['Community Area'] = pd.to_numeric(bulk['Community Area'], downcast='integer',errors='coerce')
+        # Location is dropped since each row is a dictionary, mysql db doesn't like this
+        bulk.drop(columns=['Location'], inplace=True)
+
+        return bulk
     
     # Send some data to a table in our database (creates a completely new table)
     def send_data(self, data, tablename):

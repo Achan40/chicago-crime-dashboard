@@ -106,7 +106,7 @@ cube(`Corecrimedata`, {
     
     year: {
       sql: `year`,
-      type: `time`
+      type: `number`
     }
   },
   
