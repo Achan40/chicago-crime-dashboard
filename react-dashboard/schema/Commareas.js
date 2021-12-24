@@ -21,12 +21,7 @@ cube(`Commareas`, {
     community: {
       sql: `${CUBE}.\`COMMUNITY\``,
       type: `string`
-    },
-
-    area_number: {
-      sql: `${CUBE}.\`AREA_NUMBE\``,
-      type: `number`
-    },
+    }
   },
   
   dataSource: `default`

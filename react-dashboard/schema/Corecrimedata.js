@@ -19,94 +19,64 @@ cube(`Corecrimedata`, {
   
   dimensions: {
     id: {
-      sql: `id`,
+      sql: `${CUBE}.\`ID\``,
       type: `string`,
       primaryKey: true
     },
     
     caseNumber: {
-      sql: `case_number`,
+      sql: `${CUBE}.\`Case Number\``,
       type: `string`
     },
     
     block: {
-      sql: `block`,
+      sql: `${CUBE}.\`Block\``,
       type: `string`
     },
     
     iucr: {
-      sql: `iucr`,
+      sql: `${CUBE}.\`IUCR\``,
       type: `string`
     },
     
     primaryType: {
-      sql: `primary_type`,
+      sql: `${CUBE}.\`Primary Type\``,
       type: `string`
     },
     
     description: {
-      sql: `description`,
+      sql: `${CUBE}.\`Description\``,
       type: `string`
     },
     
     locationDescription: {
-      sql: `location_description`,
+      sql: `${CUBE}.\`Location Description\``,
       type: `string`
     },
     
-    beat: {
-      sql: `beat`,
+    arrest: {
+      sql: `${CUBE}.\`Arrest\``,
       type: `string`
     },
     
-    district: {
-      sql: `district`,
-      type: `string`
-    },
-    
-    ward: {
-      sql: `ward`,
+    domestic: {
+      sql: `${CUBE}.\`Domestic\``,
       type: `string`
     },
     
     fbiCode: {
-      sql: `fbi_code`,
-      type: `string`
-    },
-    
-    xCoordinate: {
-      sql: `x_coordinate`,
-      type: `string`
-    },
-    
-    yCoordinate: {
-      sql: `y_coordinate`,
-      type: `string`
-    },
-    
-    latitude: {
-      sql: `latitude`,
-      type: `string`
-    },
-    
-    longitude: {
-      sql: `longitude`,
+      sql: `${CUBE}.\`FBI Code\``,
       type: `string`
     },
     
     updatedOn: {
-      sql: `updated_on`,
+      sql: `${CUBE}.\`Updated On\``,
       type: `time`
     },
     
     date: {
-      sql: `date`,
+      sql: `${CUBE}.\`Date\``,
       type: `time`
-    },
-    
-    year: {
-      sql: `year`,
-      type: `number`
     }
   },
   

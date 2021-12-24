@@ -131,6 +131,3 @@ dmypy.json
 # database cred
 dbcreds.py
 apicreds.py
-
-# bulk dataset
-CrimeDataBulk.csv
