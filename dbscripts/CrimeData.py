@@ -224,6 +224,16 @@ class CrimeData:
         # Load data into a pandas dataframe
         data = pd.DataFrame(df)
 
+        # Drop location column since each entry is a dictionary, mysql db doesn't like this datatype
+        # also rare edge case if there is no "location" column, json format field won't appear if nan
+        try:
+            data.drop(columns=['location'], inplace=True)
+        except:
+            pass
+            
+        # Turn NaN to none, because mysql won't insert NaN
+        data = data.where(pd.notnull(data), None)
+
         return data
 
     # close the connection, should always be done when we are finished with the object

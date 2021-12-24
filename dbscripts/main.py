@@ -14,14 +14,14 @@ if __name__ == '__main__':
     # cdobj.insert_commareas(commareas)
 
     # loading bulk data into corecrimedatatable
-    df = cdobj.get_bulk_crime_data('2010','2011','1000000')
-    cdobj.insert_corecrimedata(df)
+    # df = cdobj.get_bulk_crime_data('2010','2011','200')
+    # cdobj.insert_corecrimedata(df)
 
     # retrieving and sending updates
-    # latest = cdobj.most_recent_update_on_corecrimedata()
-    # updates = cdobj.get_corecrimedata_updates(timestamp=latest,limit='50000')
-    # cdobj.insert_corecrimedata(updates)
+    # should only use when after all bulk data is loaded in, for obvious reasons.
+    latest = cdobj.most_recent_update_on_corecrimedata() # max value in corecrimedata updated_on column
+    updates = cdobj.get_corecrimedata_updates(timestamp=latest,limit='500')
+    cdobj.insert_corecrimedata(updates)
 
+    # should always close database connection when finished
     cdobj.close()
-
-    
