@@ -2,6 +2,7 @@ import requests
 import json
 import pandas as pd
 from mysql.connector import connect, Error
+from time import time
 
 # local files containing credentials
 from apicreds import APP_TOKEN
@@ -55,7 +56,7 @@ class CrimeData:
         self.cur.execute(create_corecrime_table_query)
         self.con.commit()
 
-        # use get_bulk_crime_data or ____to get the df to pass into this method
+    # use get_bulk_crime_data or get_corecrimedata_updates to retrieve the dataframe to pass into this method
     def insert_corecrimedata(self, df):
         insert_corecrime = """
         INSERT INTO corecrimedata (
@@ -104,8 +105,10 @@ class CrimeData:
             latitude=VALUES(latitude),
             longitude=VALUES(longitude)
         """
-        for row in df.itertuples():
-            data = (
+
+        start_time = time()
+
+        bulk_params = [ (
                 row.id,
                 row.case_number,
                 row.date,
@@ -127,15 +130,12 @@ class CrimeData:
                 row.updated_on,
                 row.latitude,
                 row.longitude
-                )
-            try:
-                self.cur.execute(insert_corecrime,data)
-                if row.Index % 100 == 0:
-                    print(row.Index)
-            except:
-                print(row)
-                pass
+                ) for row in df.itertuples()]
+
+        # executemany massively speeds up insertion for large datasets
+        self.cur.executemany(insert_corecrime,bulk_params)
         self.con.commit()
+        print(f"Time taken {time() - start_time}")
 
     # create the commareas table (no api for this dataset, must upload via csv)
     # commareas describest the community areas of chicago, generally a static dataset
@@ -150,6 +150,7 @@ class CrimeData:
         self.con.commit()
 
     # load the csv file from https://data.cityofchicago.org/api/views/igwz-8jzy/rows.csv?accessType=DOWNLOAD&bom=true&format=true into a dataframe and use it as an input
+    # small dataset, no need to use executemany
     def insert_commareas(self,df):
         insert_commareas = """
         INSERT INTO commareas (
@@ -176,9 +177,9 @@ class CrimeData:
     
 
     # Retreive data from Socrata API
-    def get_bulk_crime_data(self, startyear, endyear, limit='1000000'):
+    def get_bulk_crime_data(self, year, limit='10000'):
         # String literal, pull all available data from API for some time frame
-        url = f'https://data.cityofchicago.org/resource/ijzp-q8t2.json?$where=year<={endyear} AND year >= {startyear}&$order=date ASC&$limit={limit}'
+        url = f'https://data.cityofchicago.org/resource/ijzp-q8t2.json?$where=year={year}&$order=date ASC&$limit={limit}'
         # Using our app token
         headers = {'Accept': 'application/json', 'X-App-Token': APP_TOKEN}
         resp = requests.get(url,headers=headers)
