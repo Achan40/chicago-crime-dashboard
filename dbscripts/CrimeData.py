@@ -142,7 +142,7 @@ class CrimeData:
     def create_commareas(self):
         create_commareas_table_query = """
         CREATE TABLE commareas (
-            community_area INT,
+            community_area INT PRIMARY KEY,
             community_desc TEXT
         )
         """

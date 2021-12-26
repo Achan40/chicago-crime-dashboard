@@ -7,7 +7,10 @@ cube(`Corecrimedata`, {
   },
   
   joins: {
-    
+    Commareas: {
+      relationship: `belongsTo`,
+      sql: `${Corecrimedata}.community_area = ${Commareas}.community_area`
+    }
   },
   
   measures: {

@@ -20,7 +20,8 @@ cube(`Commareas`, {
   dimensions: {
     communityArea: {
       sql: `community_area`,
-      type: `number`
+      type: `number`,
+      primaryKey: true
     },
     
     communityDesc: {

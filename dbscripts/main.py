@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from CrimeData import CrimeData
 
 if __name__ == '__main__':
