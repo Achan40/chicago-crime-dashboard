@@ -18,8 +18,13 @@ cube(`Commareas`, {
   },
   
   dimensions: {
-    community: {
-      sql: `${CUBE}.\`COMMUNITY\``,
+    communityArea: {
+      sql: `community_area`,
+      type: `number`
+    },
+    
+    communityDesc: {
+      sql: `community_desc`,
       type: `string`
     }
   },

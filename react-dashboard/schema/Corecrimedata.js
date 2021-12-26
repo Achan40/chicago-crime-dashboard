@@ -19,64 +19,109 @@ cube(`Corecrimedata`, {
   
   dimensions: {
     id: {
-      sql: `${CUBE}.\`ID\``,
+      sql: `id`,
       type: `string`,
       primaryKey: true
     },
     
     caseNumber: {
-      sql: `${CUBE}.\`Case Number\``,
+      sql: `case_number`,
       type: `string`
+    },
+
+    date: {
+      sql: `date`,
+      type: `time`
     },
     
     block: {
-      sql: `${CUBE}.\`Block\``,
+      sql: `block`,
       type: `string`
     },
     
     iucr: {
-      sql: `${CUBE}.\`IUCR\``,
+      sql: `iucr`,
       type: `string`
     },
     
     primaryType: {
-      sql: `${CUBE}.\`Primary Type\``,
+      sql: `primary_type`,
       type: `string`
     },
     
     description: {
-      sql: `${CUBE}.\`Description\``,
+      sql: `description`,
       type: `string`
     },
     
     locationDescription: {
-      sql: `${CUBE}.\`Location Description\``,
+      sql: `location_description`,
       type: `string`
     },
-    
+
     arrest: {
-      sql: `${CUBE}.\`Arrest\``,
+      sql: `arrest`,
+      type: `boolean`
+    },
+
+    domestic: {
+      sql: `domestic`,
+      type: `boolean`
+    },
+    
+    beat: {
+      sql: `beat`,
       type: `string`
     },
     
-    domestic: {
-      sql: `${CUBE}.\`Domestic\``,
+    district: {
+      sql: `district`,
       type: `string`
+    },
+    
+    ward: {
+      sql: `ward`,
+      type: `string`
+    },
+
+    communityArea: {
+      sql: `community_area`,
+      type: `number`
     },
     
     fbiCode: {
-      sql: `${CUBE}.\`FBI Code\``,
+      sql: `fbi_code`,
       type: `string`
     },
     
+    xCoordinate: {
+      sql: `x_coordinate`,
+      type: `string`
+    },
+    
+    yCoordinate: {
+      sql: `y_coordinate`,
+      type: `string`
+    },
+
+    year: {
+      sql: `year`,
+      type: `number`
+    },
+        
     updatedOn: {
-      sql: `${CUBE}.\`Updated On\``,
+      sql: `updated_on`,
       type: `time`
     },
     
-    date: {
-      sql: `${CUBE}.\`Date\``,
-      type: `time`
+    latitude: {
+      sql: `latitude`,
+      type: `string`
+    },
+    
+    longitude: {
+      sql: `longitude`,
+      type: `string`
     }
   },
   
