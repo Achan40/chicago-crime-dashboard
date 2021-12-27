@@ -2,14 +2,16 @@ cube(`Corecrimedata`, {
   sql: `SELECT * FROM crimeinfo.corecrimedata`,
   
   preAggregations: {
-    // Pre-Aggregations definitions go here
-    // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
+    // Speed up performace by preaggregations
+    // This is a preaggregation on our linked table
     countByCommunityDesc: {
       dimensions: [Commareas.communityDesc],
       measures: [Corecrimedata.count]
     }
   },
   
+  // Corecrimedata does not have the names of community areas
+  // we link it to our table which has the names of the community areas
   joins: {
     Commareas: {
       relationship: `belongsTo`,
