@@ -63,9 +63,9 @@ const ChartRenderer = () => {
   "filters": [
     {
       "member": "Corecrimedata.year",
-      "operator": "inDateRange",
+      "operator": "gte",
       "values": [
-        "2010","2020"
+        "2018"
       ]
     }
   ],
