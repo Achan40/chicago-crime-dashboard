@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import cubejs from "@cubejs-client/core";
 import { QueryRenderer } from "@cubejs-client/react";
 import 'bootstrap/dist/css/bootstrap.css';
+import YrCountChart from './YrCountChart';
 
 class CommDropDown extends Component {
     constructor() {
@@ -19,6 +20,7 @@ class CommDropDown extends Component {
             commarea: "Select a community area"
         }
 
+        // used for generating jsx in a loop
         this.commareadescarr = []
 
         // bind custom methods
@@ -59,10 +61,12 @@ class CommDropDown extends Component {
                     <div>
                         <DropdownButton id="dropdown-basic-button" title={this.state.commarea}>
                             {/* genereate JSX in a loop */}
+                            <Dropdown.Item onClick={this.handleChange} id ='ENTIRE CITY'>ENTIRE CITY</Dropdown.Item>
                             {this.commareadescarr.map(item => (
                                 <Dropdown.Item onClick={this.handleChange} id ={item['Commareas.communityDesc']}>{item['Commareas.communityDesc']}</Dropdown.Item>
                             ))}
                         </DropdownButton>
+                        <YrCountChart filter={this.state.commarea}/>
                     </div>
                     );
                 }}
