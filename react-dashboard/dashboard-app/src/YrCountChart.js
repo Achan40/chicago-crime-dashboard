@@ -3,7 +3,7 @@ import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
 import React, { Component } from 'react';
 import { AreaChart, Area } from 'recharts';
-import CartesianChart from './CartesianChart';
+import CartesianChart from './helpercomponents/CartesianChart';
 
 class YrCountChart extends Component {
     constructor() {
@@ -58,15 +58,7 @@ class YrCountChart extends Component {
           "dimensions": [
             "Corecrimedata.year"
           ],
-          "filters": [
-            {
-              "member": "Commareas.communityDesc",
-              "operator": "equals",
-              "values": [
-                this.props.filter
-              ]
-            }
-          ]
+          "filters": this.props.filters
         }}
               cubejsApi={this.cubejsApi}
               resetResultSetOnChange={false}

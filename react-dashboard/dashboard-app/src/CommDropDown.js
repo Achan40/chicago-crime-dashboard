@@ -15,12 +15,13 @@ class CommDropDown extends Component {
             { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
         );
 
-        // saving state
+        // saving state, name of community area, and the filter cubejs parameters
         this.state = {
-            commarea: "Select a community area"
+            commarea: "Select a community area",
+            filters: []
         }
 
-        // used for generating jsx in a loop
+        // used for generating jsx dropdown items in a loop
         this.commareadescarr = []
 
         // bind custom methods
@@ -29,10 +30,26 @@ class CommDropDown extends Component {
 
     // update the selected commarea when one is selected from the dropdown
     // on the onClick event (once an item from the dropdown is selected), the state is set to the id of the selected dropdown item.
+    // If 'ENTIRE CITY' Dropdown is selected, do not apply a filter
     handleChange(event) {
-        this.setState({
-            commarea: event.target.id
-        })
+        if (event.target.id === 'ENTIRE CITY') {
+            this.setState({
+                commarea: "ENTIRE CITY",
+                filters: []
+            })
+        } else {
+            this.setState({
+                commarea: event.target.id,
+                filters: [{
+                    "member": "Commareas.communityDesc",
+                    "operator": "equals",
+                    "values": [
+                        event.target.id
+                    ]
+                }]
+            })
+        }
+        console.log(this.state.commarea,this.state.filters)
     }
 
     render () {
@@ -60,13 +77,12 @@ class CommDropDown extends Component {
                 return (
                     <div>
                         <DropdownButton id="dropdown-basic-button" title={this.state.commarea}>
-                            {/* genereate JSX in a loop */}
                             <Dropdown.Item onClick={this.handleChange} id ='ENTIRE CITY'>ENTIRE CITY</Dropdown.Item>
                             {this.commareadescarr.map(item => (
                                 <Dropdown.Item onClick={this.handleChange} id ={item['Commareas.communityDesc']}>{item['Commareas.communityDesc']}</Dropdown.Item>
                             ))}
                         </DropdownButton>
-                        <YrCountChart filter={this.state.commarea}/>
+                        <YrCountChart filters={this.state.filters}/>
                     </div>
                     );
                 }}
