@@ -4,14 +4,17 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import cubejs from "@cubejs-client/core";
 import { QueryRenderer } from "@cubejs-client/react";
 import 'bootstrap/dist/css/bootstrap.css';
+
 import YrCountChart from './YrCountChart';
+import PieArrestChart from './PieArrestChart';
+import RawDataTable from './RawDataTable';
 
 class CommDropDown extends Component {
     constructor() {
         super()
         // link to cubejs
         this.cubejsApi = cubejs(
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDAxNDYyODMsImV4cCI6MTY0MDIzMjY4M30.zsUoQ48_CIY8os1KvfWYcaBBkS_YzxZ3RsgH5YV5GIc',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDA5MjcwMDIsImV4cCI6MTY0MzUxOTAwMn0.aZuu1QSHH_JXmXlvHYcVphzcHN-k-66yB7gd0AzzLEI',
             { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
         );
 
@@ -49,7 +52,6 @@ class CommDropDown extends Component {
                 }]
             })
         }
-        console.log(this.state.commarea,this.state.filters)
     }
 
     render () {
@@ -83,6 +85,8 @@ class CommDropDown extends Component {
                             ))}
                         </DropdownButton>
                         <YrCountChart filters={this.state.filters}/>
+                        <PieArrestChart filters={this.state.filters}/>
+                        <RawDataTable filters={this.state.filters}/>
                     </div>
                     );
                 }}

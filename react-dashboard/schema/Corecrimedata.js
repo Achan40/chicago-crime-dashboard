@@ -1,5 +1,5 @@
 cube(`Corecrimedata`, {
-  sql: `SELECT * FROM crimeinfo.corecrimedata`,
+  sql: `SELECT * FROM crimeinfodev.corecrimedata`,
   
   preAggregations: {
     // Speed up performace by preaggregations

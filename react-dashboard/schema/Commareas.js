@@ -1,5 +1,5 @@
 cube(`Commareas`, {
-  sql: `SELECT * FROM crimeinfo.commareas`,
+  sql: `SELECT * FROM crimeinfodev.commareas`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here

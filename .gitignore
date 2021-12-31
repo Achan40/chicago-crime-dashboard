@@ -130,4 +130,5 @@ dmypy.json
 
 # database cred
 dbcreds.py
+dbcredsdev.py
 apicreds.py

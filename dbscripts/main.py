@@ -10,11 +10,11 @@ if __name__ == '__main__':
     # cdobj.create_commareas()
 
     # populate commareas table
-    # commareas = pd.read_csv('./datasets/CommAreas.csv')
+    # commareas = pd.read_csv("./datasets/CommAreas.csv")
     # cdobj.insert_commareas(commareas)
 
     # loading bulk data into corecrimedatatable
-    for year in range(2018,2020):
+    for year in range(2020,2022):
         df = cdobj.get_bulk_crime_data(year,'500000') # fetch data from API
         # upload data in chunks
         for chunk in np.array_split(df,20):

@@ -12,37 +12,37 @@ class YrCountChart extends Component {
         this.colors = ['#FF6492', '#141446', '#7A77FF'];
 
         this.cubejsApi = cubejs(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDAyMjYyNjEsImV4cCI6MTY0MDMxMjY2MX0.MyjDXXR7xRqL39X3m_tz4Gxo6H5IayVEWpz32W_nG0U',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDA5MjcwMDIsImV4cCI6MTY0MzUxOTAwMn0.aZuu1QSHH_JXmXlvHYcVphzcHN-k-66yB7gd0AzzLEI',
         { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
         );
 
-        this.renderChart = ({ resultSet, error, pivotConfig }) => {
-            if (error) {
-              return <div>{error.toString()}</div>;
-            }
-          
-            if (!resultSet) {
-              return <Spin />;
-            }
-          
-            return (
-              <CartesianChart resultSet={resultSet} ChartComponent={AreaChart}>
-                  {resultSet.seriesNames().map((series, i) => (
-                  <Area
-                      key={series.key}
-                      stackId="a"
-                      dataKey={series.key}
-                      name={series.title}
-                      stroke={this.colors[i]}
-                      fill={this.colors[i]}
-                  />
-                  ))}
-              </CartesianChart>
-              );
-          };
-
         this.renderChart = this.renderChart.bind(this)
     }
+
+    renderChart = ({ resultSet, error, pivotConfig }) => {
+      if (error) {
+        return <div>{error.toString()}</div>;
+      }
+    
+      if (!resultSet) {
+        return <Spin />;
+      }
+    
+      return (
+        <CartesianChart resultSet={resultSet} ChartComponent={AreaChart}>
+            {resultSet.seriesNames().map((series, i) => (
+            <Area
+                key={series.key}
+                stackId="a"
+                dataKey={series.key}
+                name={series.title}
+                stroke={this.colors[i]}
+                fill={this.colors[i]}
+            />
+            ))}
+        </CartesianChart>
+        );
+    };
 
     render() {
         return (
