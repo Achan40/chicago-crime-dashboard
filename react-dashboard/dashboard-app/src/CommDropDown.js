@@ -5,21 +5,22 @@ import cubejs from "@cubejs-client/core";
 import { QueryRenderer } from "@cubejs-client/react";
 import 'bootstrap/dist/css/bootstrap.css';
 
-import YrCountChart from './YrCountChart';
-import PieArrestChart from './PieArrestChart';
+import YrBarChart from './YrBarChart';
+import CountLineChart from './CountLineChart';
+import ArrestPieChart from './ArrestPieChart';
 import RawDataTable from './RawDataTable';
+import TypeBarChart from './TypeBarChart';
 
 class CommDropDown extends Component {
     constructor() {
         super()
-        // link to cubejs
-        this.cubejsApi = cubejs(
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDA5MjcwMDIsImV4cCI6MTY0MzUxOTAwMn0.aZuu1QSHH_JXmXlvHYcVphzcHN-k-66yB7gd0AzzLEI',
-            { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
-        );
 
-        // saving state, name of community area, and the filter cubejs parameters
+        // saving state. We need to pass down cubejs API to each of our components
         this.state = {
+            cubejsApi: cubejs(
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDA5MjcwMDIsImV4cCI6MTY0MzUxOTAwMn0.aZuu1QSHH_JXmXlvHYcVphzcHN-k-66yB7gd0AzzLEI',
+                { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
+            ),
             commarea: "Select a community area",
             filters: []
         }
@@ -68,7 +69,7 @@ class CommDropDown extends Component {
                         "Commareas.communityDesc": "asc"
                         },
                 }}
-                cubejsApi={this.cubejsApi}
+                cubejsApi={this.state.cubejsApi}
                 render={({ resultSet }) => {
                 if (!resultSet) {
                     return "Loading Analytics...";
@@ -81,12 +82,14 @@ class CommDropDown extends Component {
                         <DropdownButton id="dropdown-basic-button" title={this.state.commarea}>
                             <Dropdown.Item onClick={this.handleChange} id ='ENTIRE CITY'>ENTIRE CITY</Dropdown.Item>
                             {this.commareadescarr.map(item => (
-                                <Dropdown.Item onClick={this.handleChange} id ={item['Commareas.communityDesc']}>{item['Commareas.communityDesc']}</Dropdown.Item>
+                                <Dropdown.Item onClick={this.handleChange} id ={item['Commareas.communityDesc']} key={item['Commareas.communityDesc']}>{item['Commareas.communityDesc']}</Dropdown.Item>
                             ))}
                         </DropdownButton>
-                        <YrCountChart filters={this.state.filters}/>
-                        <PieArrestChart filters={this.state.filters}/>
-                        <RawDataTable filters={this.state.filters}/>
+                        <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                        <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                        <ArrestPieChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                        <TypeBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                        <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
                     </div>
                     );
                 }}

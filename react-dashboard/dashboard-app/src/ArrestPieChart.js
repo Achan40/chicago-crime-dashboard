@@ -1,4 +1,3 @@
-import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
 import 'antd/dist/antd.css';
@@ -6,16 +5,11 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recha
 import React, { Component } from 'react';
 
 
-class PieArrestChart extends Component {
+class ArrestPieChart extends Component {
     constructor() {
         super()
         
         this.colors = ['#FF6492', '#141446', '#7A77FF'];
-
-        this.cubejsApi = cubejs(
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDA5MjcwMDIsImV4cCI6MTY0MzUxOTAwMn0.aZuu1QSHH_JXmXlvHYcVphzcHN-k-66yB7gd0AzzLEI',
-            { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
-            );
 
         this.renderChart = this.renderChart.bind(this)
     }
@@ -33,7 +27,7 @@ class PieArrestChart extends Component {
             <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
                     <Pie
-                        isAnimationActive={false}
+                        isAnimationActive={true}
                         data={resultSet.chartPivot()}
                         nameKey="x"
                         dataKey={resultSet.seriesNames()[0].key}
@@ -66,7 +60,7 @@ class PieArrestChart extends Component {
           ],
           "filters": this.props.filters
         }}
-              cubejsApi={this.cubejsApi}
+              cubejsApi={this.props.cubejsApi}
               resetResultSetOnChange={false}
               render={(props) => this.renderChart({
                 ...props,
@@ -86,4 +80,4 @@ class PieArrestChart extends Component {
     }
 }
 
-export default PieArrestChart
+export default ArrestPieChart

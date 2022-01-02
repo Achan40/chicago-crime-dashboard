@@ -1,20 +1,14 @@
-import cubejs from '@cubejs-client/core';
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
 import React, { Component } from 'react';
-import { AreaChart, Area } from 'recharts';
+import { LineChart, Line } from 'recharts';
 import CartesianChart from './helpercomponents/CartesianChart';
 
-class YrCountChart extends Component {
+class CountLineChart extends Component {
     constructor() {
         super()
 
         this.colors = ['#FF6492', '#141446', '#7A77FF'];
-
-        this.cubejsApi = cubejs(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDA5MjcwMDIsImV4cCI6MTY0MzUxOTAwMn0.aZuu1QSHH_JXmXlvHYcVphzcHN-k-66yB7gd0AzzLEI',
-        { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
-        );
 
         this.renderChart = this.renderChart.bind(this)
     }
@@ -29,9 +23,9 @@ class YrCountChart extends Component {
       }
     
       return (
-        <CartesianChart resultSet={resultSet} ChartComponent={AreaChart}>
+        <CartesianChart resultSet={resultSet} ChartComponent={LineChart}>
             {resultSet.seriesNames().map((series, i) => (
-            <Area
+            <Line
                 key={series.key}
                 stackId="a"
                 dataKey={series.key}
@@ -51,23 +45,22 @@ class YrCountChart extends Component {
           "measures": [
             "Corecrimedata.count"
           ],
-          "timeDimensions": [],
-          "order": {
-            "Corecrimedata.count": "desc"
-          },
-          "dimensions": [
-            "Corecrimedata.year"
-          ],
+          "timeDimensions": [{
+              "dimension": "Corecrimedata.date",
+              "granularity": "month"
+          }],
+          "order": {},
+          "dimensions": [],
           "filters": this.props.filters
         }}
-              cubejsApi={this.cubejsApi}
+              cubejsApi={this.props.cubejsApi}
               resetResultSetOnChange={false}
               render={(props) => this.renderChart({
                 ...props,
-                chartType: 'table',
+                chartType: 'line',
                 pivotConfig: {
           "x": [
-            "Corecrimedata.year"
+            "Corecrimedata.date.month"
           ],
           "y": [
             "measures"
@@ -81,4 +74,4 @@ class YrCountChart extends Component {
     }
 }
 
-export default YrCountChart
+export default CountLineChart
