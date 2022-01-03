@@ -29,62 +29,33 @@ class RawDataTable extends Component {
           return (
               <QueryRenderer
                   query={{
-              "measures": [],
-              "timeDimensions": [],
-              "order": [
-              [
-                  "Corecrimedata.updatedOn",
-                  "desc"
-              ],
-              [
-                  "Commareas.communityDesc",
-                  "asc"
-              ]
-              ],
-              "dimensions": [
-              "Corecrimedata.caseNumber",
-              "Corecrimedata.date",
-              "Corecrimedata.primaryType",
-              "Corecrimedata.description",
-              "Corecrimedata.locationDescription",
-              "Corecrimedata.arrest",
-              "Corecrimedata.district",
-              "Corecrimedata.xCoordinate",
-              "Corecrimedata.yCoordinate",
-              "Corecrimedata.updatedOn",
-              "Corecrimedata.latitude",
-              "Corecrimedata.longitude",
-              "Commareas.communityDesc"
-              ],
-              "filters": this.props.filters,
-              "limit": 50
-          }}
+                    "measures": [
+                      "Corecrimedata.count"
+                    ],
+                    "timeDimensions": [],
+                    "order": {
+                      "Corecrimedata.count": "desc"
+                    },
+                    "dimensions": [
+                      "Commareas.communityDesc",
+                    ],
+                    "filters": []
+                  }}
                   cubejsApi={this.props.cubejsApi}
                   resetResultSetOnChange={false}
                   render={(props) => this.renderChart({
                   ...props,
                   chartType: 'table',
                   pivotConfig: {
-              "x": [
-              "Corecrimedata.caseNumber",
-              "Corecrimedata.date",
-              "Corecrimedata.primaryType",
-              "Corecrimedata.description",
-              "Corecrimedata.locationDescription",
-              "Corecrimedata.arrest",
-              "Corecrimedata.district",
-              "Corecrimedata.xCoordinate",
-              "Corecrimedata.yCoordinate",
-              "Corecrimedata.updatedOn",
-              "Corecrimedata.latitude",
-              "Corecrimedata.longitude",
-              "Commareas.communityDesc"
-              ],
-              "y": [],
-              "fillMissingDates": true,
-              "joinDateRange": false,
-              "limit": 50
-          }
+                    "x": [
+                      "Commareas.communityDesc"
+                    ],
+                    "y": [
+                      "measures"
+                    ],
+                    "fillMissingDates": true,
+                    "joinDateRange": false
+                  }
                   })}
               />
           );

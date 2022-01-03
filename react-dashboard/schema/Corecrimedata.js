@@ -4,10 +4,22 @@ cube(`Corecrimedata`, {
   preAggregations: {
     // Speed up performace by preaggregations
     // This is a preaggregation on our linked table
-    countByCommunityDesc: {
-      dimensions: [Commareas.communityDesc],
-      measures: [Corecrimedata.count]
-    }
+
+    countByYear: {
+      type: `rollup`,
+      dimensions: [
+        Corecrimedata.year, 
+        Commareas.communityDesc, 
+        Corecrimedata.primaryType, 
+        Corecrimedata.arrest
+      ],
+      measures: [Corecrimedata.count],
+      timeDimension: Corecrimedata.date,
+      granularity: `month`,
+      refreshKey: {
+        every: `10 second`
+      }
+    },
   },
   
   // Corecrimedata does not have the names of community areas

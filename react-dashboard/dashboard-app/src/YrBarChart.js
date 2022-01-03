@@ -46,9 +46,12 @@ class YrBarChart extends Component {
             "Corecrimedata.count"
           ],
           "timeDimensions": [],
-          "order": {
-            "Corecrimedata.count": "desc"
-          },
+          "order": [
+            [
+              "Corecrimedata.year",
+              "asc"
+            ]
+          ],
           "dimensions": [
             "Corecrimedata.year"
           ],
