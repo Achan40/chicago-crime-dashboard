@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import Dropdown from 'react-bootstrap/Dropdown'
+import 'bootstrap/dist/css/bootstrap.css';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import cubejs from "@cubejs-client/core";
 import { QueryRenderer } from "@cubejs-client/react";
-import 'bootstrap/dist/css/bootstrap.css';
 
 import YrBarChart from './YrBarChart';
 import CountLineChart from './CountLineChart';
@@ -157,7 +160,6 @@ class DropDowns extends Component {
                                 <Dropdown.Item onClick={this.handleAreaChange} id ={item} key={item}>{item}</Dropdown.Item>
                             ))}
                         </DropdownButton>
-
                         {this.state.isActive ? 
                             <DropdownButton id="dropdown-year" title={this.state.year}>
                                 <Dropdown.Item onClick={this.handleTimeChange} id ='All available years' key='All available years'>All available years</Dropdown.Item>
@@ -166,12 +168,15 @@ class DropDowns extends Component {
                                 ))}
                             </DropdownButton>
                         : null}
-                        
-                        <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                        <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                        <ArrestPieChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                        <TypeBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                        <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                        <Container>
+                            <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                            <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                            <Row>
+                                <Col xs={4}><ArrestPieChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/></Col>
+                                <Col><TypeBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/></Col>
+                            </Row>
+                            <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                        </Container>
                     </div>
                     );
                 }}
