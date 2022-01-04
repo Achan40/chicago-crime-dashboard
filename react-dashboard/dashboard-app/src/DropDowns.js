@@ -172,7 +172,7 @@ class DropDowns extends Component {
                             <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
                             <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
                             <Row>
-                                <Col xs={4}><ArrestPieChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/></Col>
+                                <Col xs={5}><ArrestPieChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/></Col>
                                 <Col><TypeBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/></Col>
                             </Row>
                             <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>

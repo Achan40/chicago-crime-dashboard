@@ -57,6 +57,8 @@ const TableRenderer = ({ resultSet, pivotConfig }) => {
         formatTableData(columns, resultSet.tablePivot(pivotConfig)),
     ];
     }, [resultSet, pivotConfig]);
+    
+    console.log(tableColumns)
     return (
     <Table pagination={true} columns={tableColumns} dataSource={dataSource} />
     );

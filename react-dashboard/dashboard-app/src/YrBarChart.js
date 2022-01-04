@@ -21,7 +21,6 @@ class YrBarChart extends Component {
       if (!resultSet) {
         return <Spin />;
       }
-    
       return (
         <CartesianChart resultSet={resultSet} ChartComponent={BarChart}>
             {resultSet.seriesNames().map((series, i) => (

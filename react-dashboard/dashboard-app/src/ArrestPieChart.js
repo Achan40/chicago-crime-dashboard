@@ -22,7 +22,6 @@ class ArrestPieChart extends Component {
         if (!resultSet) {
             return <Spin />;
         }
-        
         return (
             <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
@@ -34,7 +33,7 @@ class ArrestPieChart extends Component {
                         fill="#8884d8"
                     >
                         {resultSet.chartPivot().map((e, index) => (
-                        <Cell key={index} fill={this.colors[index % this.colors.length]} />
+                        <Cell name={index===0 ? 'No Arrest':'Arrest'} key={index} fill={this.colors[index % this.colors.length]} />
                         ))}
                     </Pie>
                 <Legend />
