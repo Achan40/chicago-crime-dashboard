@@ -3,7 +3,7 @@ import { CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 
 const getMeasure = (objname) => {
   if (objname === 'Corecrimedata.count') {
-    return "Number of crimes"
+    return "Number of Crimes"
   }
   return "";
 }
