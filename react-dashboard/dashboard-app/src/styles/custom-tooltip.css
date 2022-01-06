@@ -1,0 +1,21 @@
+.custom-tooltip {
+	position: relative;
+	background: #c1cccd;
+	border-radius: .4em;
+    text-align: center;
+    padding: 2px 4px 2px 4px;
+}
+
+.custom-tooltip p {
+	margin: 0;
+}
+
+.custom-tooltip h6 {
+	margin: 0;
+}
+
+.custom-tooltip:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+}
