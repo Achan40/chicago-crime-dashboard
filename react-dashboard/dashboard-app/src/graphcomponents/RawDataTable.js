@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 import 'antd/dist/antd.css';
 import React, { Component } from 'react';
 
-import TableRenderer from './helpercomponents/TableRenderer';
+import TableRenderer from '../helpercomponents/TableRenderer';
 
 class RawDataTable extends Component {
     constructor() {

@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import React, { Component } from 'react';
 
-import CustomToolTip from './helpercomponents/CustomTooltip';
+import CustomToolTip from './../helpercomponents/CustomTooltip';
 
 
 class ArrestPieChart extends Component {

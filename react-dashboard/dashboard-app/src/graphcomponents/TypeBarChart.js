@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import React, { Component } from 'react';
 import { BarChart, Bar} from 'recharts';
 
-import CartesianChart from './helpercomponents/CartesianChart';
+import CartesianChart from '../helpercomponents/CartesianChart';
 
 class TypeBarChart extends Component {
     constructor() {

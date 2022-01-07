@@ -1,10 +1,10 @@
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
 import React, { Component } from 'react';
-import { BarChart, Bar } from 'recharts';
-import CartesianChart from './helpercomponents/CartesianChart';
+import { LineChart, Line } from 'recharts';
+import CartesianChart from './../helpercomponents/CartesianChart';
 
-class YrBarChart extends Component {
+class CountLineChart extends Component {
     constructor() {
         super()
 
@@ -21,10 +21,11 @@ class YrBarChart extends Component {
       if (!resultSet) {
         return <Spin />;
       }
+    
       return (
-        <CartesianChart resultSet={resultSet} ChartComponent={BarChart}>
+        <CartesianChart resultSet={resultSet} ChartComponent={LineChart}>
             {resultSet.seriesNames().map((series, i) => (
-            <Bar
+            <Line
                 key={series.key}
                 stackId="a"
                 dataKey={series.key}
@@ -44,26 +45,22 @@ class YrBarChart extends Component {
           "measures": [
             "Corecrimedata.count"
           ],
-          "timeDimensions": [],
-          "order": [
-            [
-              "Corecrimedata.year",
-              "asc"
-            ]
-          ],
-          "dimensions": [
-            "Corecrimedata.year"
-          ],
+          "timeDimensions": [{
+              "dimension": "Corecrimedata.date",
+              "granularity": "month"
+          }],
+          "order": {},
+          "dimensions": [],
           "filters": this.props.filters
         }}
               cubejsApi={this.props.cubejsApi}
               resetResultSetOnChange={false}
               render={(props) => this.renderChart({
                 ...props,
-                chartType: 'table',
+                chartType: 'line',
                 pivotConfig: {
           "x": [
-            "Corecrimedata.year"
+            "Corecrimedata.date.month"
           ],
           "y": [
             "measures"
@@ -77,4 +74,4 @@ class YrBarChart extends Component {
     }
 }
 
-export default YrBarChart
+export default CountLineChart

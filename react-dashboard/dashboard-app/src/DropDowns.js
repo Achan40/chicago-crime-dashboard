@@ -2,17 +2,18 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import cubejs from "@cubejs-client/core";
 import { QueryRenderer } from "@cubejs-client/react";
 
-import YrBarChart from './YrBarChart';
-import CountLineChart from './CountLineChart';
-import ArrestPieChart from './ArrestPieChart';
-import RawDataTable from './RawDataTable';
-import TypeBarChart from './TypeBarChart';
+import YrBarChart from './graphcomponents/YrBarChart';
+import CountLineChart from './graphcomponents/CountLineChart';
+import ArrestPieChart from './graphcomponents/ArrestPieChart';
+import RawDataTable from './graphcomponents/RawDataTable';
+import TypeBarChart from './graphcomponents/TypeBarChart';
 
 class DropDowns extends Component {
     constructor() {
@@ -154,21 +155,25 @@ class DropDowns extends Component {
                 }
                 return (
                     <div>
-                        <DropdownButton id="dropdown-basic-button" title={this.state.commarea}>
-                            <Dropdown.Item onClick={this.handleAreaChange} id ='ENTIRE CITY' key='ENTIRE CITY'>ENTIRE CITY</Dropdown.Item>
-                            {this.commareadescarr.map(item => (
-                                <Dropdown.Item onClick={this.handleAreaChange} id ={item} key={item}>{item}</Dropdown.Item>
-                            ))}
-                        </DropdownButton>
-                        {this.state.isActive ? 
-                            <DropdownButton id="dropdown-year" title={this.state.year}>
-                                <Dropdown.Item onClick={this.handleTimeChange} id ='All available years' key='All available years'>All available years</Dropdown.Item>
-                                {this.yearsindb.map(item => (
-                                    <Dropdown.Item onClick={this.handleTimeChange} id ={item} key={item}>{item}</Dropdown.Item>
-                                ))}
-                            </DropdownButton>
-                        : null}
                         <Container>
+                           <ButtonGroup>
+                               <DropdownButton id="dropdown-basic-button" title={this.state.commarea}>
+                                    <Dropdown.Item onClick={this.handleAreaChange} id ='ENTIRE CITY' key='ENTIRE CITY'>ENTIRE CITY</Dropdown.Item>
+                                    {this.commareadescarr.map(item => (
+                                        <Dropdown.Item onClick={this.handleAreaChange} id ={item} key={item}>{item}</Dropdown.Item>
+                                    ))}
+                                </DropdownButton>
+                            
+                                {this.state.isActive ? 
+                                    <DropdownButton id="dropdown-year" title={this.state.year}>
+                                        <Dropdown.Item onClick={this.handleTimeChange} id ='All available years' key='All available years'>All available years</Dropdown.Item>
+                                        {this.yearsindb.map(item => (
+                                            <Dropdown.Item onClick={this.handleTimeChange} id ={item} key={item}>{item}</Dropdown.Item>
+                                        ))}
+                                    </DropdownButton>
+                                : null}
+                           </ButtonGroup>
+                                
                             <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
                             <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
                             <Row>
@@ -176,6 +181,7 @@ class DropDowns extends Component {
                                 <Col><TypeBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/></Col>
                             </Row>
                             <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+
                         </Container>
                     </div>
                     );
