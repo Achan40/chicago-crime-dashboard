@@ -6,12 +6,21 @@
     left: 0;
     width: 100%;
 }
-
-.left-footer {
-    text-align: right;
+  
+.footer-text {
+    text-align: center;
 }
 
 p { 
     margin:0 
 }
 
+h3 {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+hr {
+	width:50%;
+    margin: auto;
+}

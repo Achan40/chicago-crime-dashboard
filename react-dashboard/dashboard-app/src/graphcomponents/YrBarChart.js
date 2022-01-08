@@ -1,8 +1,9 @@
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
 import React, { Component } from 'react';
-import { BarChart, Bar } from 'recharts';
+import { BarChart, Bar, Tooltip } from 'recharts';
 import CartesianChart from '../helpercomponents/CartesianChart';
+import CustomToolTip from "../helpercomponents/CustomTooltip";
 
 class YrBarChart extends Component {
     constructor() {
@@ -33,6 +34,7 @@ class YrBarChart extends Component {
                 fill={this.colors[i]}
             />
             ))}
+            {(this.props.filters.filter(function (o) {return o.member === "Corecrimedata.year"}).length > 0) === false ? null : <Tooltip content={<CustomToolTip />} cursor={{fill: 'transparent'}}/>}
         </CartesianChart>
         );
     };

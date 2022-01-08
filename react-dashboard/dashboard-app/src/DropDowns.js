@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import cubejs from "@cubejs-client/core";
 import { QueryRenderer } from "@cubejs-client/react";
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
+import Card from 'react-bootstrap/Card'
 
 import YrBarChart from './graphcomponents/YrBarChart';
 import CountLineChart from './graphcomponents/CountLineChart';
 import ArrestPieChart from './graphcomponents/ArrestPieChart';
 import RawDataTable from './graphcomponents/RawDataTable';
 import TypeBarChart from './graphcomponents/TypeBarChart';
+
+import './styles/dropdowns.scss'
 
 class DropDowns extends Component {
     constructor() {
@@ -76,7 +79,6 @@ class DropDowns extends Component {
             for (let i = 0; i < tmp.length; i++) {
                 if (tmp[i].member === 'Corecrimedata.year') {
                     tmp.splice(i, 1)
-                    console.log("CLEAR TIMEFRAME")
                 }
             }
             this.setState({
@@ -155,34 +157,66 @@ class DropDowns extends Component {
                 }
                 return (
                     <div>
-                        <Container>
-                           <ButtonGroup>
-                               <DropdownButton id="dropdown-basic-button" title={this.state.commarea}>
-                                    <Dropdown.Item onClick={this.handleAreaChange} id ='ENTIRE CITY' key='ENTIRE CITY'>ENTIRE CITY</Dropdown.Item>
-                                    {this.commareadescarr.map(item => (
-                                        <Dropdown.Item onClick={this.handleAreaChange} id ={item} key={item}>{item}</Dropdown.Item>
-                                    ))}
-                                </DropdownButton>
-                            
-                                {this.state.isActive ? 
-                                    <DropdownButton id="dropdown-year" title={this.state.year}>
-                                        <Dropdown.Item onClick={this.handleTimeChange} id ='All available years' key='All available years'>All available years</Dropdown.Item>
-                                        {this.yearsindb.map(item => (
-                                            <Dropdown.Item onClick={this.handleTimeChange} id ={item} key={item}>{item}</Dropdown.Item>
-                                        ))}
-                                    </DropdownButton>
-                                : null}
-                           </ButtonGroup>
+                        <Navbar bg="light" expand="lg" className='navbar-comp'>
+                                <Container>
+                                    <Navbar.Brand>Chicago Crime Dashboard</Navbar.Brand>
+                                    <Navbar.Toggle aria-controls="navbar-nav" />
+                                    <Navbar.Collapse id="navbar-nav">
+                                        <Nav className="me-auto">
+                                            <NavDropdown id="dropdown-commarea" title={this.state.commarea}>
+                                                <NavDropdown.Item onClick={this.handleAreaChange} id ='ENTIRE CITY' key='ENTIRE CITY'>ENTIRE CITY</NavDropdown.Item>
+                                            {this.commareadescarr.map(item => (
+                                                <NavDropdown.Item onClick={this.handleAreaChange} id ={item} key={item}>{item}</NavDropdown.Item>
+                                            ))}
+                                            </NavDropdown>
+                                            {this.state.isActive ? 
+                                            <NavDropdown id="dropdown-year" title={this.state.year}>
+                                                <NavDropdown.Item onClick={this.handleTimeChange} id ='All available years' key='All available years'>All available years</NavDropdown.Item>
+                                            {this.yearsindb.map(item => (
+                                                <NavDropdown.Item onClick={this.handleTimeChange} id ={item} key={item}>{item}</NavDropdown.Item>
+                                            ))}
+                                            </NavDropdown>
+                                            : null}
+                                        </Nav>
+                                    </Navbar.Collapse>
+                                </Container>
+                        </Navbar>
+                        <Container id="charts-container">
+                            <Card>
+                                <Card.Body>
+                                    <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                                </Card.Body>
                                 
-                            <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                            <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                            </Card>
+                            <Card>
+                                <Card.Body>
+                                    <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                                </Card.Body>
+                            </Card>
+                            
                             <Row>
-                                <Col xs={5}><ArrestPieChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/></Col>
-                                <Col><TypeBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/></Col>
+                                <Col xs={12} md={4}>
+                                    <Card>
+                                        <Card.Body>
+                                        <ArrestPieChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                                <Col>
+                                    <Card>
+                                        <Card.Body>
+                                        <TypeBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
                             </Row>
-                            <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-
+                            <Card>
+                                <Card.Body>
+                                    <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                                </Card.Body>
+                            </Card>
                         </Container>
+                        
                     </div>
                     );
                 }}
