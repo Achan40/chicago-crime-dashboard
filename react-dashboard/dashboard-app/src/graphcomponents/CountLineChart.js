@@ -23,7 +23,7 @@ class CountLineChart extends Component {
       }
     
       return (
-        <CartesianChart resultSet={resultSet} ChartComponent={LineChart}>
+        <CartesianChart resultSet={resultSet} ChartComponent={LineChart} cust="monthly">
             {resultSet.seriesNames().map((series, i) => (
             <Line
                 key={series.key}

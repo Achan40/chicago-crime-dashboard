@@ -15,6 +15,7 @@ import CountLineChart from './graphcomponents/CountLineChart';
 import ArrestPieChart from './graphcomponents/ArrestPieChart';
 import RawDataTable from './graphcomponents/RawDataTable';
 import TypeBarChart from './graphcomponents/TypeBarChart';
+import DropDownCard from './helpercomponents/DropDownCard';
 
 import './styles/dropdowns.scss'
 
@@ -157,7 +158,7 @@ class DropDowns extends Component {
                 }
                 return (
                     <div>
-                        <Navbar bg="light" expand="lg" className='navbar-comp'>
+                        <Navbar bg="light" expand="lg" className='navbar-comp' sticky='top'>
                                 <Container>
                                     <Navbar.Brand>Chicago Crime Dashboard</Navbar.Brand>
                                     <Navbar.Toggle aria-controls="navbar-nav" />
@@ -182,39 +183,35 @@ class DropDowns extends Component {
                                 </Container>
                         </Navbar>
                         <Container id="charts-container">
-                            <Card>
-                                <Card.Body>
-                                    <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                                </Card.Body>
-                                
-                            </Card>
-                            <Card>
-                                <Card.Body>
-                                    <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                                </Card.Body>
-                            </Card>
-                            
+                           <DropDownCard>
+                                <Card.Title className='dropdown-card-title'>Number of Crimes by Year</Card.Title>
+                                <YrBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                            </DropDownCard>
+
+                           <DropDownCard>
+                                <Card.Title className='dropdown-card-title'>Number of Crimes by Year by Month</Card.Title>
+                                <CountLineChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                            </DropDownCard>
+
                             <Row>
                                 <Col xs={12} md={4}>
-                                    <Card>
-                                        <Card.Body>
+                                    <DropDownCard>
+                                        <Card.Title className='dropdown-card-title'>Number of Arrests</Card.Title>
                                         <ArrestPieChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                                        </Card.Body>
-                                    </Card>
+                                    </DropDownCard>
                                 </Col>
                                 <Col>
-                                    <Card>
-                                        <Card.Body>
+                                    <DropDownCard>
+                                        <Card.Title className='dropdown-card-title'>Number of Crimes by Type</Card.Title>
                                         <TypeBarChart filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                                        </Card.Body>
-                                    </Card>
+                                    </DropDownCard>
                                 </Col>
                             </Row>
-                            <Card>
-                                <Card.Body>
-                                    <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
-                                </Card.Body>
-                            </Card>
+
+                           <DropDownCard>
+                                <Card.Title className='dropdown-card-title'>Number of Crimes by Community Area</Card.Title>
+                                <RawDataTable filters={this.state.filters} cubejsApi={this.state.cubejsApi}/>
+                            </DropDownCard>
                         </Container>
                         
                     </div>

@@ -1,6 +1,6 @@
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import React, { Component } from 'react';
 
 import TableRenderer from '../helpercomponents/TableRenderer';

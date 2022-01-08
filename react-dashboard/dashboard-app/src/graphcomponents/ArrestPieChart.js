@@ -1,6 +1,6 @@
 import { QueryRenderer } from '@cubejs-client/react';
 import { Spin } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import React, { Component } from 'react';
 
