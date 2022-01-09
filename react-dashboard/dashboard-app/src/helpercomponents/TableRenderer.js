@@ -74,7 +74,7 @@ const TableRenderer = ({ resultSet, pivotConfig }) => {
     }, [resultSet, pivotConfig]);
   
     return (
-    <Table pagination={true} columns={tableColumns} dataSource={dataSource} />
+    <Table pagination={{position: ['bottomCenter']}} columns={tableColumns} dataSource={dataSource} />
     );
 };
 

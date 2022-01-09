@@ -14,7 +14,7 @@ if __name__ == '__main__':
     # cdobj.insert_commareas(commareas)
 
     # loading bulk data into corecrimedatatable
-    for year in range(2013,2014):
+    for year in range(2012,2017):
         df = cdobj.get_bulk_crime_data(year,'500000') # fetch data from API
         # upload data in chunks
         for chunk in np.array_split(df,20):
