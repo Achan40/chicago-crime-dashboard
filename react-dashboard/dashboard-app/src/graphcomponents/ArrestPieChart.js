@@ -11,7 +11,7 @@ class ArrestPieChart extends Component {
     constructor() {
         super()
         
-        this.colors = ['#FF6492', '#141446', '#7A77FF'];
+        this.colors = ['#2D3142','#B0D7FF'];
 
         this.renderChart = this.renderChart.bind(this)
     }

@@ -3,6 +3,8 @@ import { CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 import './../styles/custom-tooltip.css'
 import CustomToolTip from "./CustomTooltip";
 
+let hovercolor = '#B0D7FF'
+
 // ternary operator used because I wanted to customize the "Number of Crimes by Year by Month" chart.
 // works fine as long as I don't customize the values of another chart (use nested ternary if we ever need to get to that...)
 const CartesianChart = ({ resultSet, children, ChartComponent, cust=''}) => (
@@ -16,7 +18,7 @@ const CartesianChart = ({ resultSet, children, ChartComponent, cust=''}) => (
         <YAxis />
         <CartesianGrid />
         {children}
-        <Tooltip content={<CustomToolTip />} cursor={{fill: '#141446'}}/>
+        <Tooltip content={<CustomToolTip />} cursor={{fill: hovercolor}}/>
       </ChartComponent>
   : 
       <ChartComponent data={resultSet.chartPivot()}>
@@ -24,7 +26,7 @@ const CartesianChart = ({ resultSet, children, ChartComponent, cust=''}) => (
         <YAxis />
         <CartesianGrid />
         {children}
-        <Tooltip content={<CustomToolTip />} cursor={{fill: '#141446'}}/>
+        <Tooltip content={<CustomToolTip />} cursor={{fill: hovercolor}}/>
       </ChartComponent>
       }
     </ResponsiveContainer>

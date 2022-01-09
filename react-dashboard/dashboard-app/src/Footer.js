@@ -19,7 +19,7 @@ class Footer extends Component {
                                 <p>This dashboard is updated every _______ at ____ CST.</p>
                                 <div class="link-cont">
                                     <div class="link-wrapper">
-                                        Data is gathered from the <a class="link hover-2" href='https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present-Dashboard/5cd6-ry5g' target="_blank" rel="noopener noreferrer">Chicago Data Portal</a>
+                                        Data is gathered from the <a class="link hover-2" href='https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present-Dashboard/5cd6-ry5g' target="_blank" rel="noopener noreferrer">Chicago Data Portal.</a>
                                     </div>
 
                                 </div>

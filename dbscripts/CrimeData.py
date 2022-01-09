@@ -212,18 +212,33 @@ class CrimeData:
         # returns the a datetime object, y-m-d
         return result[0][0].date()
 
+    # Get the earliest avaialble year in database
+    def earliest_year(self):
+        update_on_query = "SELECT MIN(year) FROM corecrimedata"
+        result = None
+        try:
+            self.cur.execute(update_on_query)
+            result = self.cur.fetchall()
+        except Exception as e:
+            print(e)
+        return str(result[0][0])
 
     # Get updated data from Socrata API
-    def get_corecrimedata_updates(self,timestamp,limit):
+    def get_corecrimedata_updates(self,timestamp, earliest_year,limit):
         # String literal, pull all available data from API for some time frame
         url = f'https://data.cityofchicago.org/resource/ijzp-q8t2.json?$where=updated_on >= \'{timestamp}\' &$order=date ASC&$limit={limit}'
         # Using our app token
         headers = {'Accept': 'application/json', 'X-App-Token': APP_TOKEN}
         resp = requests.get(url,headers=headers)
+
         df = json.loads(resp.text)
 
         # Load data into a pandas dataframe
         data = pd.DataFrame(df)
+
+        # only load updated data if I have that year in my db
+        # the year column from API (as of this moment) is of type string, but pandas can still filter by it.
+        data = data.loc[(data['year'] >= earliest_year)]
 
         # Drop location column since each entry is a dictionary, mysql db doesn't like this datatype
         # also rare edge case if there is no "location" column, json format field won't appear if nan

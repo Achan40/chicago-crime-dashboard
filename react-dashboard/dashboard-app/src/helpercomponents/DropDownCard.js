@@ -6,7 +6,7 @@ import '../styles/dropdowns.scss'
 class DropDownCard extends Component {
     render() {
         return (
-            <Card bg="light" className='dropdown-card'>
+            <Card bg='light' className='dropdown-card'>
                 <Card.Body>
                     {this.props.children}
                 </Card.Body>

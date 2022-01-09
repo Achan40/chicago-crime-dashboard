@@ -9,7 +9,7 @@ class YrBarChart extends Component {
     constructor() {
         super()
 
-        this.colors = ['#FF6492', '#141446', '#7A77FF'];
+        this.colors = ['#2D3142'];
 
         this.renderChart = this.renderChart.bind(this)
     }
