@@ -6,7 +6,7 @@ from time import time
 
 # local files containing credentials
 from apicreds import APP_TOKEN
-from dbcredsdev import HOST,PORT,USER,PASSWORD,DATABASE
+from dbcreds import HOST,PORT,USER,PASSWORD,DATABASE
 
 # class we can use to retrieve data from the chicago crime data api, as well load data into our database
 class CrimeData:

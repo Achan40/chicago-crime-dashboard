@@ -1,5 +1,5 @@
 cube(`Corecrimedata`, {
-  sql: `SELECT * FROM crimeinfodev.corecrimedata`,
+  sql: `SELECT * FROM crimeinfo.corecrimedata`,
   
   preAggregations: {
     // Speed up performace by preaggregations
@@ -17,7 +17,7 @@ cube(`Corecrimedata`, {
       timeDimension: Corecrimedata.date,
       granularity: `month`,
       refreshKey: {
-        every: `5 second`
+        every: `6 hour`
       }
     },
   },
