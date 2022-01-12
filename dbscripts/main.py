@@ -9,7 +9,7 @@ if __name__ == '__main__':
     # cdobj.create_database('crimeinfo')
 
     # create corecrimedata table, commareas table
-    # cdobj.create_corecrimedata()
+    cdobj.create_corecrimedata()
     # cdobj.create_commareas()
 
     # populate commareas table

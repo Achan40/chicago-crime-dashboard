@@ -1,9 +1,10 @@
 version: '2.2'
 
 services:
+
   cube:
     restart: always
-    image: cubejs/cube:v0.29.7
+    image: cubejs/cube:v0.29.8
     ports:
       # It's better to use random port binding for 4000/3000 ports
       # without it you will not able to start multiple projects inside docker
@@ -21,14 +22,14 @@ services:
   
   cube_refresh_worker:
     restart: always
-    image: cubejs/cube:v0.29.7
+    image: cubejs/cube:v0.29.8
     env_file: .env
     volumes:
       - .:/cube/conf
 
   cubestore_router:
     restart: always
-    image: cubejs/cubestore:v0.29.7
+    image: cubejs/cubestore:v0.29.8
     environment:
       - CUBESTORE_WORKERS=cubestore_worker_1:10001,cubestore_worker_2:10002
       - CUBESTORE_REMOTE_DIR=/cube/data
@@ -39,7 +40,7 @@ services:
 
   cubestore_worker_1:
     restart: always
-    image: cubejs/cubestore:v0.29.7
+    image: cubejs/cubestore:v0.29.8
     environment:
       - CUBESTORE_WORKERS=cubestore_worker_1:10001,cubestore_worker_2:10002
       - CUBESTORE_SERVER_NAME=cubestore_worker_1:10001
@@ -53,7 +54,7 @@ services:
 
   cubestore_worker_2:
     restart: always
-    image: cubejs/cubestore:v0.29.7
+    image: cubejs/cubestore:v0.29.8
     environment:
       - CUBESTORE_WORKERS=cubestore_worker_1:10001,cubestore_worker_2:10002
       - CUBESTORE_SERVER_NAME=cubestore_worker_2:10002
@@ -67,7 +68,10 @@ services:
 
   redis:
     image: bitnami/redis:latest
+    restart: always
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
     environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    logging:
-      driver: none
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=${CUBEJS_REDIS_PASSWORD}
+      

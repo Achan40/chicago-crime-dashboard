@@ -19,6 +19,8 @@ import DropDownCard from './helpercomponents/DropDownCard';
 
 import './styles/dropdowns.scss'
 
+const API_URL = 'http://localhost:4000/cubejs-api/v1'
+
 class DropDowns extends Component {
     constructor() {
         super()
@@ -27,7 +29,7 @@ class DropDowns extends Component {
         this.state = {
             cubejsApi: cubejs(
                 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDA5MjcwMDIsImV4cCI6MTY0MzUxOTAwMn0.aZuu1QSHH_JXmXlvHYcVphzcHN-k-66yB7gd0AzzLEI',
-                { apiUrl: 'http://localhost:4000/cubejs-api/v1' }
+                { apiUrl: API_URL }
             ),
             isActive: false,
             commarea: "Select a community area",

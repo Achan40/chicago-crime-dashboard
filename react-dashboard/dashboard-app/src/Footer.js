@@ -17,9 +17,9 @@ class Footer extends Component {
                                 <h3>About</h3>
                                 <hr></hr>
                                 <p>This dashboard is updated every day at 3:00pm CST.</p>
-                                <div class="link-cont">
-                                    <div class="link-wrapper">
-                                        Data is gathered from the <a class="link hover-2" href='https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present-Dashboard/5cd6-ry5g' target="_blank" rel="noopener noreferrer">Chicago Data Portal.</a>
+                                <div className="link-cont">
+                                    <div className="link-wrapper">
+                                        Data is gathered from the <a className="link hover-2" href='https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present-Dashboard/5cd6-ry5g' target="_blank" rel="noopener noreferrer">Chicago Data Portal.</a>
                                     </div>
 
                                 </div>
@@ -30,12 +30,12 @@ class Footer extends Component {
                             <div className='footer-text'>
                                 <h3>Links</h3>
                                 <hr></hr>
-                                <div class="link-cont">
-                                    <div class="link-wrapper">
-                                        <a class="link hover-2" href='https://github.com/Achan40' target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <div className="link-cont">
+                                    <div className="link-wrapper">
+                                        <a className="link hover-2" href='https://github.com/Achan40' target="_blank" rel="noopener noreferrer">GitHub</a>
                                     </div>
                                     <div clas="link-wrapper">
-                                        <a class="link hover-2" href='https://github.com/Achan40' target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                                        <a className="link hover-2" href='https://github.com/Achan40' target="_blank" rel="noopener noreferrer">LinkedIn</a>
                                     </div>
                                 </div>
                             </div>

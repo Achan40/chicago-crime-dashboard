@@ -132,3 +132,5 @@ dmypy.json
 dbcreds.py
 dbcredsdev.py
 apicreds.py
+
+.empty
