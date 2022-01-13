@@ -1,7 +1,6 @@
-version: '3'
+version: '2'
 
 services:
-
   cube:
     restart: always
     image: cubejs/cube:v0.29.8
@@ -11,9 +10,9 @@ services:
       - 4000:4000  # Cube.js API and Developer Playground
     env_file: .env # Read of env file for configurations
     volumes:
-      - .:/cube/conf
+      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard:/cube/conf
       # We ignore Cube.js deps, because they are built-in inside the official Docker image
-      - .empty:/cube/conf/node_modules/@cubejs-backend/
+      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.empty:/cube/conf/node_modules/@cubejs-backend/
     depends_on:
       - cubestore_worker_1
       - cubestore_worker_2
@@ -25,7 +24,7 @@ services:
     image: cubejs/cube:v0.29.8
     env_file: .env
     volumes:
-      - .:/cube/conf
+      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard:/cube/conf
 
   cubestore_router:
     restart: always
@@ -36,7 +35,7 @@ services:
       - CUBESTORE_META_PORT=9999
       - CUBESTORE_SERVER_NAME=cubestore_router:9999
     volumes:
-      - .cubestore/router:/cube/data
+      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/router:/cube/data
 
   cubestore_worker_1:
     restart: always
@@ -48,7 +47,7 @@ services:
       - CUBESTORE_REMOTE_DIR=/cube/data
       - CUBESTORE_META_ADDR=cubestore_router:9999
     volumes:
-      - .cubestore/worker_1:/cube/data
+      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/worker_1:/cube/data
     depends_on:
       - cubestore_router
 
@@ -62,16 +61,13 @@ services:
       - CUBESTORE_REMOTE_DIR=/cube/data
       - CUBESTORE_META_ADDR=cubestore_router:9999
     volumes:
-      - .cubestore/worker_2:/cube/data
+      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/worker_2:/cube/data
     depends_on:
       - cubestore_router
 
   redis:
     image: bitnami/redis:latest
-    restart: always
-    volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
     environment:
-      - ALLOW_EMPTY_PASSWORD=no
-      - REDIS_PASSWORD=${CUBEJS_REDIS_PASSWORD}
-      
+      - ALLOW_EMPTY_PASSWORD=yes
+    logging:
+      driver: none

@@ -19,7 +19,8 @@ import DropDownCard from './helpercomponents/DropDownCard';
 
 import './styles/dropdowns.scss'
 
-const API_URL = 'http://localhost:4000/cubejs-api/v1'
+const API_URL = 'https://dockhero-curved-88528-flexible-ssl.dockhero.io'
+// const API_URL = 'https://cube-cc-dashboard.herokuapp.com/cubejs-api/v1'
 
 class DropDowns extends Component {
     constructor() {
