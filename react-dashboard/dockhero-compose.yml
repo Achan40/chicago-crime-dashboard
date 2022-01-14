@@ -1,4 +1,36 @@
-version: '2'
+version: '2.2.1'
+
+volumes:
+  cube-schema:
+     driver_opts:
+           type: none
+           device: /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/schema
+           o: bind
+  cube-file:
+     driver_opts:
+           type: none
+           device: /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/cube.js
+           o: bind
+  cube-router:
+     driver_opts:
+           type: none
+           device: /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/router
+           o: bind
+  cube-worker-1:
+     driver_opts:
+           type: none
+           device: /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/worker_1
+           o: bind
+  cube-worker-2:
+     driver_opts:
+           type: none
+           device: /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/worker_2
+           o: bind
+  redis-c:
+     driver_opts:
+           type: none
+           device: /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/redis
+           o: bind
 
 services:
   cube:
@@ -10,9 +42,10 @@ services:
       - 4000:4000  # Cube.js API and Developer Playground
     env_file: .env # Read of env file for configurations
     volumes:
-      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard:/cube/conf
+      - cube-schema:/cube/conf
+      - cube-file:/cube/conf
       # We ignore Cube.js deps, because they are built-in inside the official Docker image
-      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.empty:/cube/conf/node_modules/@cubejs-backend/
+      # - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.empty:/cube/conf/node_modules/@cubejs-backend/
     depends_on:
       - cubestore_worker_1
       - cubestore_worker_2
@@ -24,7 +57,8 @@ services:
     image: cubejs/cube:v0.29.8
     env_file: .env
     volumes:
-      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard:/cube/conf
+      - cube-schema:/cube/conf
+      - cube-file:/cube/conf
 
   cubestore_router:
     restart: always
@@ -34,8 +68,9 @@ services:
       - CUBESTORE_REMOTE_DIR=/cube/data
       - CUBESTORE_META_PORT=9999
       - CUBESTORE_SERVER_NAME=cubestore_router:9999
+      - COMPOSE_CONVERT_WINDOWS_PATHS=1
     volumes:
-      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/router:/cube/data
+      - cube-router:/cube/data
 
   cubestore_worker_1:
     restart: always
@@ -46,8 +81,9 @@ services:
       - CUBESTORE_WORKER_PORT=10001
       - CUBESTORE_REMOTE_DIR=/cube/data
       - CUBESTORE_META_ADDR=cubestore_router:9999
+      - COMPOSE_CONVERT_WINDOWS_PATHS=1
     volumes:
-      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/worker_1:/cube/data
+      - cube-worker-1:/cube/data
     depends_on:
       - cubestore_router
 
@@ -60,8 +96,9 @@ services:
       - CUBESTORE_WORKER_PORT=10002
       - CUBESTORE_REMOTE_DIR=/cube/data
       - CUBESTORE_META_ADDR=cubestore_router:9999
+      - COMPOSE_CONVERT_WINDOWS_PATHS=1
     volumes:
-      - /Users/Aaron/Desktop/chicago-crime-dashboard/react-dashboard/.cubestore/worker_2:/cube/data
+      - cube-worker-2:/cube/data
     depends_on:
       - cubestore_router
 
@@ -69,5 +106,7 @@ services:
     image: bitnami/redis:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    logging:
-      driver: none
+    # volumes:
+    #   - redis-c:./usr/local/etc/
+    # logging:
+    #   driver: none
