@@ -1,3 +1,7 @@
+# Probably shouldn't use heroku dockhero
+# Lots of issues with getting api to serve on https sites
+# Pretty sure this is a dead addon too, poor docs. Also have to pay $7 a month
+# Not worth the cost imo.
 version: '2.2.1'
 
 volumes:
@@ -107,6 +111,6 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     # volumes:
-    #   - redis-c:./usr/local/etc/
+    #   - redis-c:/usr/local/etc/
     # logging:
     #   driver: none

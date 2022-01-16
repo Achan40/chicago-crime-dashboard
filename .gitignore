@@ -134,3 +134,5 @@ dbcredsdev.py
 apicreds.py
 
 .empty
+# Local Netlify folder
+.netlify

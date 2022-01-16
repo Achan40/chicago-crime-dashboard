@@ -19,18 +19,17 @@ import DropDownCard from './helpercomponents/DropDownCard';
 
 import './styles/dropdowns.scss'
 
-const API_URL = ''
-// const API_URL = 'https://cube-cc-dashboard.herokuapp.com/cubejs-api/v1'
-
 class DropDowns extends Component {
     constructor() {
         super()
 
         // saving state. We need to pass down cubejs API to each of our components
+        // API_KEY and API_URL are located in hidden .env
         this.state = {
+            
             cubejsApi: cubejs(
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDA5MjcwMDIsImV4cCI6MTY0MzUxOTAwMn0.aZuu1QSHH_JXmXlvHYcVphzcHN-k-66yB7gd0AzzLEI',
-                { apiUrl: API_URL }
+                process.env.REACT_APP_CUBEJS_API_KEY,
+                { apiUrl: process.env.REACT_APP_CUBEJS_API_URL }
             ),
             isActive: false,
             commarea: "Select a community area",
