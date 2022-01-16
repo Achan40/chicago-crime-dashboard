@@ -12,6 +12,7 @@ from dbscripts.dbcreds import DATABASE, HOST, PASSWORD
 # from apicreds import APP_TOKEN
 # from dbcreds import HOST,PORT,USER,PASSWORD,DATABASE
 
+# using env variables defined in prod
 APP_TOKEN = os.environ.get('APP_TOKEN')
 HOST=os.environ.get('HOST')
 PORT=os.environ.get('PORT')
