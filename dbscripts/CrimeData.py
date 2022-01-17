@@ -5,9 +5,6 @@ import os
 from mysql.connector import connect, Error
 from time import time
 
-from dbscripts.apicreds import APP_TOKEN
-from dbscripts.dbcreds import DATABASE, HOST, PASSWORD
-
 # local files containing credentials (dev only)
 # from apicreds import APP_TOKEN
 # from dbcreds import HOST,PORT,USER,PASSWORD,DATABASE
