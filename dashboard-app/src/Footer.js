@@ -16,7 +16,7 @@ class Footer extends Component {
                             <div className='footer-text'>
                                 <h3>About</h3>
                                 <hr></hr>
-                                <p>This dashboard is updated every 3 hours.</p>
+                                <p>This dashboard is updated every 4 hours.</p>
                                 <div className="link-cont">
                                     <div className="link-wrapper">
                                         Data is gathered from the <a className="link hover-2" href='https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present-Dashboard/5cd6-ry5g' target="_blank" rel="noopener noreferrer">Chicago Data Portal.</a>
