@@ -26,7 +26,6 @@ class DropDowns extends Component {
         // saving state. We need to pass down cubejs API to each of our components
         // API_KEY and API_URL are located in hidden .env
         this.state = {
-            
             cubejsApi: cubejs(
                 process.env.REACT_APP_CUBEJS_API_KEY,
                 { apiUrl: process.env.REACT_APP_CUBEJS_API_URL }

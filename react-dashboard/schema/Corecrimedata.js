@@ -17,7 +17,7 @@ cube(`Corecrimedata`, {
       timeDimension: Corecrimedata.date,
       granularity: `month`,
       refreshKey: {
-        every: `4 hour`
+        every: `1 day`
       }
     },
   },
