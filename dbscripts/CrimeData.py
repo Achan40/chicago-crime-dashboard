@@ -6,16 +6,16 @@ from mysql.connector import connect, Error
 from time import time
 
 # local files containing credentials (dev only)
-# from apicreds import APP_TOKEN
-# from dbcreds import HOST,PORT,USER,PASSWORD,DATABASE
+from apicreds import APP_TOKEN
+from dbcredsdev import HOST,PORT,USER,PASSWORD,DATABASE
 
 # using env variables defined in prod
-APP_TOKEN = os.environ.get('APP_TOKEN')
-HOST=os.environ.get('HOST')
-PORT=os.environ.get('PORT')
-USER=os.environ.get('USER')
-PASSWORD=os.environ.get('PASSWORD')
-DATABASE=os.environ.get('DATABASE')
+# APP_TOKEN = os.environ.get('APP_TOKEN')
+# HOST=os.environ.get('HOST')
+# PORT=os.environ.get('PORT')
+# USER=os.environ.get('USER')
+# PASSWORD=os.environ.get('PASSWORD')
+# DATABASE=os.environ.get('DATABASE')
 
 # class we can use to retrieve data from the chicago crime data api, as well load data into our database
 class CrimeData:
@@ -208,6 +208,36 @@ class CrimeData:
         data = data.where(pd.notnull(data), None)
 
         return data
+    
+    def create_y_m_d(self):
+        create_y_m_d_col = """
+        ALTER TABLE corecrimedata ADD COLUMN ymd DATE;
+        """
+        self.cur.execute(create_y_m_d_col)
+        self.con.commit()
+
+    def update_y_m_d(self):
+        update_y_m_d_col = """
+        UPDATE corecrimedata
+        SET ymd = DATE(corecrimedata.date);
+        """
+        self.cur.execute(update_y_m_d_col)
+        self.con.commit()
+
+    def create_m(self):
+        create_y_m_col = """
+        ALTER TABLE corecrimedata ADD COLUMN month INT;
+        """
+        self.cur.execute(create_y_m_col)
+        self.con.commit()
+
+    def update_m(self):
+        update_m_col = """
+        UPDATE corecrimedata
+        SET month = MONTH(corecrimedata.date);
+        """
+        self.cur.execute(update_m_col)
+        self.con.commit()
 
     # Get most recent updated_on entry from database
     def most_recent_update_on_corecrimedata(self):
@@ -265,3 +295,5 @@ class CrimeData:
     def close(self):
         self.con.close()
         self.cur.close()
+
+
