@@ -183,12 +183,10 @@ class CrimeData:
                 pass
         self.con.commit()
 
-    
-
     # Retreive data from Socrata API
-    def get_bulk_crime_data(self, year, limit='10000'):
+    def get_bulk_crime_data(self, year, limit='10000',offset='0'):
         # String literal, pull all available data from API for some time frame
-        url = f'https://data.cityofchicago.org/resource/ijzp-q8t2.json?$where=year={year}&$order=date ASC&$limit={limit}'
+        url = f'https://data.cityofchicago.org/resource/ijzp-q8t2.json?$where=year={year}&$order=date ASC&$limit={limit}&$offset={offset}'
         # Using our app token
         headers = {'Accept': 'application/json', 'X-App-Token': APP_TOKEN}
         resp = requests.get(url,headers=headers)
@@ -203,7 +201,12 @@ class CrimeData:
             data.drop(columns=['location'], inplace=True)
         except:
             pass
-            
+
+        # define column ordering. If we do not restructure, pulling data from before 2012 may result in error when uploading to database later on.
+        column_order = ['id', 'case_number', 'date', 'block', 'iucr', 'primary_type', 'description', 'location_description', 'arrest', 'domestic', 'beat', 'district', 'ward', 'community_area', 'fbi_code', 'x_coordinate', 'y_coordinate', 'year', 'updated_on', 'latitude', 'longitude']
+        
+        data = data.reindex(columns=column_order)
+
         # Turn NaN to none, because mysql won't insert NaN
         data = data.where(pd.notnull(data), None)
 
@@ -261,6 +264,19 @@ class CrimeData:
         except Exception as e:
             print(e)
         return str(result[0][0])
+    
+    # Get the count of records for some year
+    def get_year_count(self, year, field):
+        # String literal, pull all available data from API for some time frame
+        url = f'https://data.cityofchicago.org/resource/ijzp-q8t2.json?$select=COUNT({field})&$where=year={year}'
+        # Using our app token
+        headers = {'Accept': 'application/json', 'X-App-Token': APP_TOKEN}
+        resp = requests.get(url,headers=headers)
+        df = json.loads(resp.text)
+
+        # convert response into a single int value
+        val = int(list(df[0].values())[0])
+        return val
 
     # Get updated data from Socrata API
     def get_corecrimedata_updates(self,timestamp, earliest_year,limit):
@@ -290,6 +306,7 @@ class CrimeData:
         data = data.where(pd.notnull(data), None)
 
         return data
+    
 
     # close the connection, should always be done when we are finished with the object
     def close(self):
