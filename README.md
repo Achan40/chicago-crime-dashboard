@@ -6,3 +6,5 @@ Python is used to load data into a [AWS RDS](https://aws.amazon.com/rds/) instan
 For more specifics, see the README within each subdirectory.
 
 View the live dashboard [here](https://cube-cc-dashboard.netlify.app).
+
+----------------------Project no longer maintained. Webapp is offline. -----------------------------
